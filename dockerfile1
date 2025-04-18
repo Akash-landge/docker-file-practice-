@@ -10,7 +10,7 @@ WORKDIR /tmp
 
 RUN wget https://www.free-css.com/assets/files/free-css-templates/download/page296/browny.zip
 
-# Unzip the file
+# create the browny_tmp directory and Extracts the contents of the browny.zip file into the browny_tmp directory
 RUN mkdir browny_tmp && \
     unzip browny.zip -d browny_tmp && \
     mv $(find browny_tmp -mindepth 1 -maxdepth 1 -type d) browny && \
