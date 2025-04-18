@@ -1,0 +1,6 @@
+FROM ubuntu:20.04
+RUN apt update && apt install -y nginx 
+COPY . /myapp
+WORKDIR /myapp 
+EXPOSE 80 
+CMD ["nginx", "-g", "daemon off;"]
