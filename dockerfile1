@@ -1,0 +1,25 @@
+# Base image
+FROM ubuntu:20.04
+
+# Install required packages
+RUN apt update && \
+    apt install -y nginx unzip curl wget
+
+# Set working directory
+WORKDIR /tmp
+
+RUN wget https://www.free-css.com/assets/files/free-css-templates/download/page296/browny.zip
+
+# Unzip the file
+RUN mkdir browny_tmp && \
+    unzip browny.zip -d browny_tmp && \
+    mv $(find browny_tmp -mindepth 1 -maxdepth 1 -type d) browny && \
+    rm -r browny_tmp
+# Copy contents to web server directory
+RUN cp -r browny/* /var/www/html/
+
+# Expose port 80
+EXPOSE 80
+
+# Start Nginx in foreground
+CMD ["nginx", "-g", "daemon off;"]
